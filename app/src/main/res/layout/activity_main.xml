@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/text"
         android:textSize="26sp"
+        android:inputType="number"
         android:layout_margin="10dp"/>
     <SeekBar
         android:layout_width="match_parent"
@@ -48,5 +49,12 @@
         android:text="Send"
         android:layout_margin="10dp"
         android:id="@+id/send"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/result"
+        android:textSize="26sp"
+        android:layout_margin="10dp"
+        />
 
 </LinearLayout>
