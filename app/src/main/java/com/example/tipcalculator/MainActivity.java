@@ -1,5 +1,6 @@
 package com.example.tipcalculator;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
@@ -23,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG="log";
     private double Summa;
     private TextView result;
+    public static final String SUM="sum";
+    public static final String TIP="tip";
+    public static final String TOTAL="total";
+    private static final int REQUEST_CODE=1;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -98,8 +103,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,OkActivity.class);
-                startActivity(intent);
+                intent.putExtra(SUM,sum.getText().toString());
+                intent.putExtra(TIP,tip.getText().toString());
+                intent.putExtra(TOTAL,total.getText().toString());
+                //startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==REQUEST_CODE)
+        {
+            if(resultCode==RESULT_OK)
+            {
+                result.setText(data.getStringExtra(TOTAL));
+            }
+            else
+            {
+                result.setText("No");
+                tip.setText("");
+                total.setText("");
+            }
+        }
+        else super.onActivityResult(requestCode, resultCode, data);
     }
 }
